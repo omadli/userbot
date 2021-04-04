@@ -1,3 +1,5 @@
+api_id = 1234 
+api_key = "YOUR KEY"
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from pyrogram.raw.functions import *
@@ -8,7 +10,7 @@ import time
 from time import sleep
 import random
  
-app = Client("mr_pythoncik", 2625259, "0ddd178b7a1e5d3b220f9905b5d8f85a")
+app = Client("mr_pythoncik", api_id, api_key)
 
 # Команда type
 @app.on_message(filters.command("type", prefixes=[".", "#", "$", "!"]) & filters.me)
@@ -62,7 +64,7 @@ def thanos(_, msg):
  
     app.send_message(chat, "Но какой ценой?")
  
-@app.on_message(filters.command("get ", prefixes=[".", "#", "$", "!"]) & filters.me)
+@app.on_message(filters.command("get", prefixes=[".", "#", "$", "!"]) & filters.me)
 def type(_, msg):
     try:
         args = msg.text.split("get ", maxsplit=1)[1]
