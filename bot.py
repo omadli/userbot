@@ -67,8 +67,8 @@ def type(_, msg):
     try:
         args = msg.text.split()
         chid, mid = args[1], args[2]
-        mid = [int(mid))
-        get = channels.GetMessages(chid, mid)
+        mid = int(mid)
+        get = channels.GetMessages(chid, [mid])
         print(get)
         app.send_message(msg.chat.id, get)
     except Exception as e:
