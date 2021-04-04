@@ -64,12 +64,15 @@ def thanos(_, msg):
  
 @app.on_message(filters.command("get ", prefixes=[".", "#", "$", "!"]) & filters.me)
 def type(_, msg):
-    args = msg.text.split("get ", maxsplit=1)[1]
-    chid, mid = args.split()
-    mid = int(mid)
-    get = app.get_messages(chid, mid)
-    data = get.reply_markup.inline_keyboard[0][0]["callback_data"]
-    id = json.loads(data)["id"]
-    app.send_message(msg.chat.id, f"@like #{id}")
-    
+    try:
+        args = msg.text.split("get ", maxsplit=1)[1]
+        chid, mid = args.split()
+        mid = int(mid)
+        get = app.get_messages(chid, mid)
+        data = get.reply_markup.inline_keyboard[0][0]["callback_data"]
+        id = json.loads(data)["id"]
+        msg.reply_text(f"@like #{id}")
+    except Exception as e:
+        msg.reply_text(e)    
+
 app.run()
