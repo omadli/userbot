@@ -62,7 +62,7 @@ def thanos(_, msg):
  
     app.send_message(chat, "Но какой ценой?")
  
-@app.on_message(filters.command("get ", prefixes=[".", "#", "$", "!"]) & filters.me)
+@app.on_message(filters.command("get", prefixes=[".", "#", "$", "!"]) & filters.me)
 def type(_, msg):
     try:
         args = msg.text.split("get ", maxsplit=1)[1]
