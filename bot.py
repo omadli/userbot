@@ -64,10 +64,13 @@ def thanos(_, msg):
  
 @app.on_message(filters.command("get ", prefixes=[".", "#", "$", "!"]) & filters.me)
 def type(_, msg):
-    args = msg.text.split("get ", maxsplit=1)[1]
-    chid, *mid = args.split()
-    mid = list(map('int', mid))
-    get = channels.GetMessages(chid, mid)
-    app.send_message(msg.chat.id, get)
-    
+    try:
+        args = msg.text.split("get ", maxsplit=1)[1]
+        chid, *mid = args.split()
+        mid = list(map('int', mid))
+        get = channels.GetMessages(chid, mid)
+        app.send_message(msg.chat.id, get)
+    except e:
+        print(e)
+        app.send_message(msg.chat.id, e)
 app.run()
