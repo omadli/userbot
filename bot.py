@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from pyrogram.raw.functions import *
- 
+import json
 from pyrogram.types import ChatPermissions
  
 import time
@@ -62,16 +62,14 @@ def thanos(_, msg):
  
     app.send_message(chat, "Но какой ценой?")
  
-@app.on_message(filters.command("get", prefixes=[".", "#", "$", "!"]) & filters.me)
+@app.on_message(filters.command("get ", prefixes=[".", "#", "$", "!"]) & filters.me)
 def type(_, msg):
-    try:
-        args = msg.text.split()
-        chid, mid = args[1], args[2]
-        mid = int(mid)
-        get = channels.GetMessages(chid, [mid])
-        print(get)
-        app.send_message(msg.chat.id, get)
-    except Exception as e:
-        print(e)
-        app.send_message(msg.chat.id, e)
+    args = msg.text.split("get ", maxsplit=1)[1]
+    chid, mid = args.split()
+    mid = int(mid)
+    get = app.get_messages(chid, mid)
+    data = get.reply_markup.inline_keyboard[0][0]["callback_data"]
+    id = json.loads(data)["id"]
+    app.send_message(msg.chat.id, f"@like #{id}")
+    
 app.run()
