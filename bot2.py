@@ -11,7 +11,7 @@ import random
 app = Client("mr_pythoncik", 2625259, "0ddd178b7a1e5d3b220f9905b5d8f85a")
 
 get = channels.GetMessages(channel="@O_romitan", id=[3])
-rm = get[0].reply_markup
+rm = get.messages.[0].reply_markup
 print(rm)
 
 app.run()
