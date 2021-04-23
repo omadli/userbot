@@ -14,7 +14,8 @@ app = Client("lucky", API_ID, API_HASH)
 @app.on_message(filters.command("type", prefixes=[".", "#", "$", "!"]) & filters.me)
 def type(_, msg):
   orig_text = msg.text.split("type ", maxsplit=1)[1]
-  text = orig_text tbp = "" # to be printed
+  text = orig_text
+  tbp = "" # to be printed
   typing_symbol = "▒"
   while(tbp != orig_text):
     try:
