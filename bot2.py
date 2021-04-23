@@ -55,7 +55,8 @@ def type(_, msg):
 @app.on_message(filters.photo & filters.chat(["me", "@xvestru_channel", "@mr_pythoncik"]))
 def get_bonus(_, msg):
   try:
-    c = msg.caption bonus = ""
+    c = msg.caption
+    bonus = ""
     for entity in msg.caption_entities:
       if entity.type == "code":
         l, o = entity.length, entity.offset
